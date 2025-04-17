@@ -1,0 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-inter;
+}
+
+/* Generic Styles */
+@layer components {
+  .bg-bar {
+    @apply bg-primary fixed w-full h-5 hidden max-md:block;
+  }
+  .input-with-icon {
+    @apply w-full bg-input bg-no-repeat bg-[12px_center] rounded-lg p-3 pl-10 focus:outline-none focus:ring-2 focus:ring-primary;
+    background-size: 16px;
+  }
+  .input-without-icon {
+    @apply w-full bg-input rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+  
+  .btn-primary {
+    @apply w-full text-white rounded-lg p-2 font-semibold hover:brightness-95;
+  }
+  
+  .radio-wrapper {
+    @apply flex items-center justify-between w-full px-4 py-3 bg-input rounded-lg cursor-pointer;
+  }
+  .radio-wrapper-with-img {
+    @apply flex items-center justify-between w-full px-2 py-3 bg-input rounded-lg cursor-pointer;
+  }
+  .radio {
+    @apply w-5 h-5 border rounded-full;
+  }
+  .radio-img {
+    @apply w-6 max-sm:w-4;
+  }
+  
+  .input-box {
+    @apply px-4 py-1 border border-gray-300 rounded-md text-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 text-sm text-center;
+  }
+
+  .ad-input {
+    @apply border-b border-black p-1 w-full focus:outline-none;
+  }
+  .ad-textarea {
+    @apply border border-black p-1 w-full resize-none rounded-md h-32;
+  }
+  .social-profile-item {
+    @apply flex items-center gap-4 px-4 py-3 cursor-pointer;
+  }
+  .social-profile-item > img {
+    @apply w-8;
+  }
+  .social-profile-tag {
+    @apply text-sm text-gray-700;
+  }
+  .social-profile-add {
+    @apply text-primary text-sm;
+  }
+  .chat-image {
+    @apply grid place-content-center p-3 h-full aspect-square bg-chatCardBg rounded-md;
+  }
+  .divider-bar {
+    @apply w-full h-0.5 bg-gray-300;
+  }
+  .dashboard-search {
+    @apply shadow-xl bg-white overflow-hidden outline-secondary outline outline-[3px];
+  }
+  .chat-search, .chat-search > input {
+    @apply  bg-cardBg overflow-hidden;
+  }
+
+  .ad-social-accounts-grid {
+    @apply col-span-2;
+  }
+}
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primary rounded-lg hover:bg-blue-700;
+  }
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+}
