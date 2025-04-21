@@ -17,46 +17,46 @@ import { use } from "react";
 const Analytics = () => {
   const { user } = useAuth();
   const [adsPostedCount, setAdsPostedCount] = useState(0);
-const [adStats, setAdStats] = useState({
-  totalViews: 0,
-  totalSearches: 0,
-  totalChats: 0,
-});
-const [total, setTotal] = useState(0);
+  const [adStats, setAdStats] = useState({
+    totalViews: 0,
+    totalSearches: 0,
+    totalChats: 0,
+  });
+  const [total, setTotal] = useState(0);
 
-useEffect(() => {
-  const fetchAds = async () => {
-    try {
-      console.log("user: ", user?.role, user?._id);
-      const adsData = await getAdsByUserId({ userId: user?._id, role: user?.role });
+  useEffect(() => {
+    const fetchAds = async () => {
+      try {
+        console.log("user: ", user?.role, user?._id);
+        const adsData = await getAdsByUserId({ userId: user?._id, role: user?.role });
 
-      setAdsPostedCount(adsData?.ads?.length || 0);
-      setAdStats({
-        totalViews: adsData?.totalViews || 0,
-        totalSearches: adsData?.totalSearches || 0,
-        totalChats: adsData?.totalChats || 0,
-      });
+        setAdsPostedCount(adsData?.ads?.length || 0);
+        setAdStats({
+          totalViews: adsData?.totalViews || 0,
+          totalSearches: adsData?.totalSearches || 0,
+          totalChats: adsData?.totalChats || 0,
+        });
 
-      console.log("adsData: ", adsData);
-    } catch (error) {
-      console.error("Error loading analytics:", error);
+        console.log("adsData: ", adsData);
+      } catch (error) {
+        console.error("Error loading analytics:", error);
+      }
+    };
+
+    if (user?._id) {
+      fetchAds();
     }
-  };
+  }, [user]);
 
-  if (user?._id) {
-    fetchAds();
-  }
-}, [user]);
+  useEffect(() => {
+    const computedTotal =
+      (adStats?.totalChats || 0) +
+      (adStats?.totalViews || 0) +
+      (adStats?.totalSearches || 0) +
+      (user?.views || 0);
 
-useEffect(() => {
-  const computedTotal =
-    (adStats?.totalChats || 0) +
-    (adStats?.totalViews || 0) +
-    (adStats?.totalSearches || 0) +
-    (user?.views || 0);
-
-  setTotal(computedTotal);
-}, [adStats, user?.views]);
+    setTotal(computedTotal);
+  }, [adStats, user?.views]);
 
 
   const pieChartData = [
@@ -108,7 +108,7 @@ useEffect(() => {
           {/* Labels */}
           <div className="flex flex-col gap-6 w-full max-w-xs">
             {pieChartData.map((item, idx) => {
-              const percentage = ((item.value / total) * 100).toFixed(1);
+              const percentage = total === 0 ? "0.0" : ((item.value / total) * 100).toFixed(1);
               return (
                 <div key={idx} className="flex items-center gap-4">
                   <span
