@@ -8,7 +8,7 @@ const Signup = () => {
   const [selected, setSelected] = useState("");
   const navigate = useNavigate();
 
-  useRedirectAuth(true);
+  //useRedirectAuth(true);
 
   return (
     <AuthPagesWrapper>
